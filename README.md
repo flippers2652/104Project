@@ -1,6 +1,7 @@
 # 104Project
 The source code for my 104 Project.
-The python file ([main.py](https://github.com/flippers2652/104Project/blob/master/main.py)) calculates the the numbers required (mean, Standard Error, Etc.) and saves the answers in  python.sty.
+
+The python file ([main.py](https://github.com/flippers2652/104Project/blob/master/main.py)) calculates the the numbers required (mean, Standard Error, Etc.) and saves the answers in  python.sty that looks like this:
 ```tex
 \ProvidesPackage{python}
 \newcommand{\data}{\begin{tabularx}{0.8\textwidth}{ >{\raggedleft\arraybackslash}X>{\raggedleft\arraybackslash}X>{\raggedleft\arraybackslash}X>{\raggedleft\arraybackslash}X>{\raggedleft\arraybackslash}X }
