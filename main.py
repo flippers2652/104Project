@@ -1,7 +1,7 @@
 import pyreadr
 import matplotlib.pyplot as plt
-from numpy import mean,std
-from scipy.stats import sem,norm,probplot,skew
+from numpy import mean,std,corrcoef,where,abs
+from scipy.stats import sem,norm,probplot,skew,zscore
 import subprocess
 import math
 def sigfig(x,s):
@@ -11,7 +11,7 @@ def sigfig(x,s):
 
 # Read the data
 result = pyreadr.read_r('./PROJ.Rdata') # also works for Rds
-ID=143
+ID=37
 data=result['PROJ'].values[ID-1]
 
 # 1. Calculate the sample mean.
@@ -21,8 +21,11 @@ sd=std(data,ddof=1)
 
 # 4. Discuss if assumptions required for the sample mean to be nearly normal are satisfied (3 sentences max).
 # Histogram
-plt.hist(data,bins=range(-50,61,10),color="m")
-plt.plot(range(-50,55),400*norm.pdf(range(-50,55),xbar,sd),color="c")
+min=int(sorted(data)[0]//10)*10-10
+max=int(sorted(data)[-1]//10)*10+11
+print(sorted(data))
+plt.hist(data,bins=range(min,max,10),color="b") # Bars
+plt.plot(range(min,max),400*norm.pdf(range(min,max),xbar,sd),color="c") # Line
 plt.title("Histogram")
 plt.xlabel("Stock Price Returns")
 plt.ylabel("Quantity")
@@ -31,13 +34,27 @@ plt.savefig("hist.png",dpi=500)
 # QQ
 plt.figure("qq")
 plt.scatter(norm.ppf([(2*i+1)/80 for i in range(0,40)],xbar,sd),sorted(data),marker="o",color="g",zorder=20) # Data
-plt.plot(range(-50,35),range(-50,35),color="r") # Line
+plt.plot(range(min,max),range(min,max),color="r") # Line
 plt.title("QQ Plot Normal(μ="+format(xbar, ".3f")+",σ="+format(sd, ".3f")+")")
 plt.xlabel("Expected Stock Price Returns")
 plt.ylabel("Sample Stock Price Returns")
 plt.savefig("qq.png",dpi=500)
 
+# Extra Data
+
+z = zscore(data)
+
+pos_outliers=len(where(z > 3)[0])
+neg_outliers=len(where(z < -3)[0])
+
+if neg_outliers==0:
+    SDATA=sorted(data)[pos_outliers:]
+else:
+    SDATA=sorted(data)[pos_outliers:-neg_outliers]
+    
 sk=skew(data)
+correlation_matrix = corrcoef(SDATA, norm.ppf([(2*i+1)/(40-pos_outliers-neg_outliers)/2 for i in range(0,40-pos_outliers-neg_outliers)],mean(SDATA),std(SDATA,ddof=1)))
+corr=correlation_matrix[0,1]
 
 #5. Assuming the assumptions are satisfied, calculate the standard error of the mean.
 se=sem(data)
@@ -67,7 +84,10 @@ with open("python.sty","w") as file:
     writedef(file,"intervalB","("+format(interval99[0], ".3f")+", "+format(interval99[1], ".3f")+")")
     writedef(file,"pvalue","{:.{}f}".format( pvalue, 3 - int(math.floor(math.log10(abs(pvalue)))) - 1 ))
     writedef(file,"sk","{:.{}f}".format( sk, 3 - int(math.floor(math.log10(abs(pvalue)))) - 1 ))
+    writedef(file,"corr","{:.{}f}".format( corr, 3 - int(math.floor(math.log10(abs(pvalue)))) - 1 ))
+    writedef(file,"poutliers",str(pos_outliers))
+    writedef(file,"noutliers",str(neg_outliers))
 
 #Compile to pdf
-subprocess.run(["pdflatex","main.tex"])
+subprocess.run(["pdflatex","-output-directory=pdf","-jobname="+"ID"+str(ID),"main.tex"])
 

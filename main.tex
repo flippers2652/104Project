@@ -58,7 +58,19 @@ on whether the data appears to be normally distributed or not (2 sentences max).
 \includegraphics[width=.4\textwidth]{hist.png}
 \includegraphics[width=.4\textwidth]{qq.png}
 \end{center}
-The data looks relatively normally distributed as the however has an outlier at the positive side.
+\ifdim \corr pt>0.8pt{
+The data looks relatively normally distributed as the points are near the line\ifdim \noutliers pt>0pt{ however}\else{\ifdim \poutliers pt>0pt{ however}\else{.}\fi}\fi
+\ifdim \noutliers pt>0pt {
+the data has {\noutliers }  {outlier\ifdim \noutliers pt>1pt {s}\fi}  on the positive side.
+} \fi
+\ifdim \poutliers pt>0pt {
+the data has {\poutliers }  {outlier\ifdim \poutliers pt>1pt {s}\fi}  on the positive side.
+} \fi
+} \else {
+The data does not look normally distributed.
+} \fi
+
+
 \end{minipage}%
 \newpage
 \begin{minipage}{.96\textwidth}
@@ -68,7 +80,7 @@ The data set I've been give is ``randomly sampled" so the data will be independe
 The sample size is 40 which is greater than 30 so therefore the sample is large.
 \ifdim \sk pt<0.5pt {
 	\ifdim \sk pt>-0.5pt {
-		From the charts above, the data does not seem to have a strong skew.
+		From the charts above, the data does not seem to have a much skew.
 	} \else {
 		From the charts above, the data seems to have a \ifdim \sk pt>-1.0pt {slight negative skew but as the sample size is large and the skew is slight the central limit theorem applies.} \else {strong negative skew so the central limit theorem does not apply with only 40 samples.} \fi
 		
