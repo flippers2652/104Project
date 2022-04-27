@@ -39,7 +39,7 @@
 
 
 %%%Data%%%
-\section*{Data}
+\section*{Data : \ID}
 \data
 
 
@@ -58,7 +58,7 @@ on whether the data appears to be normally distributed or not (2 sentences max).
 \includegraphics[width=.4\textwidth]{hist.png}
 \includegraphics[width=.4\textwidth]{qq.png}
 \end{center}
-The data looks relatively normally distributed however has an outlier at the positive side.
+The data looks relatively normally distributed as the however has an outlier at the positive side.
 \end{minipage}%
 \newpage
 \begin{minipage}{.96\textwidth}
@@ -70,11 +70,11 @@ The sample size is 40 which is greater than 30 so therefore the sample is large.
 	\ifdim \sk pt>-0.5pt {
 		From the charts above, the data does not seem to have a strong skew.
 	} \else {
-		From the charts above, the data seems to have a \ifdim \sk pt>-1.0pt {slight} \fi negative skew.
+		From the charts above, the data seems to have a \ifdim \sk pt>-1.0pt {slight negative skew but as the sample size is large and the skew is slight the central limit theorem applies.} \else {strong negative skew so the central limit theorem does not apply with only 40 samples.} \fi
 		
 	} \fi
 } \else {
-From the charts above, the data seems to have a \ifdim \sk pt<1.0pt {slight} positive skew.
+From the charts above, the data seems to have a \ifdim \sk pt<1.0pt {slight positive skew but as the sample size is large and the skew is slight the central limit theorem applies.} \else {strong positive skew so the central limit theorem does not apply with only 40 samples.} \fi
 } \fi
 \subsection*{5. Assuming the assumptions are satisfied, calculate the standard error of the mean.}
 The standard error of the mean is $\se$.
@@ -93,15 +93,15 @@ $H_A:\mu_P\neq0$\\
 The p-value for the mean of $\xbar$ is $\pvalue$.
 \subsection*{9. Would you reject the null hypothesis using a significance level of $\boldsymbol{\alpha}$ = 0.05?}
 \ifdim \pvalue pt>0.05pt {
-I would not reject the null hypothesis at $\alpha = 0.05$ as $p=\pvalue>0.05$. Also $0 \in \intervalA$.
+I would not have sufficient evidence to reject the null hypothesis at $\alpha = 0.05$ as $p=\pvalue>0.05$. Also $0 \in \intervalA$. So $\mu_P=0$.
 }\else {
-I would reject the null hypothesis at $\alpha = 0.05$ as $p=\pvalue<0.05$. Also $0 \not\in \intervalA$.
+I would have sufficient evidence to reject the null hypothesis at $\alpha = 0.05$ as $p=\pvalue<0.05$. Also $0 \not\in \intervalA$. So $\mu_P\neq0$.
 } \fi
 \subsection*{10. Would you reject the null hypothesis using a significance level of $\boldsymbol{\alpha}$ = 0.01?}
 \ifdim \pvalue pt>0.01pt {
-I would not reject the null hypothesis at $\alpha = 0.01$ as $p=\pvalue>0.01$. Also $0 \in \intervalB$.
+I would not have sufficient evidence to reject the null hypothesis at $\alpha = 0.01$ as $p=\pvalue>0.01$. Also $0 \in \intervalB$. So $\mu_P=0$.
 } \else {
-I would reject the null hypothesis at $\alpha = 0.01$ as $p=\pvalue<0.01$. Also $0 \not\in \intervalB$.
+I would have sufficient evidence to reject the null hypothesis at $\alpha = 0.01$ as $p=\pvalue<0.01$. Also $0 \not\in \intervalB$. So $\mu_P\neq0$.
 } \fi
 \end{minipage}%
 

@@ -30,12 +30,9 @@ plt.savefig("hist.png",dpi=500)
 
 # QQ
 plt.figure("qq")
-print(norm.cdf(data,xbar,sd))
-plt.scatter(norm.ppf([(2*i+1)/80 for i in range(0,40)],xbar,sd),sorted(data),marker="o",color="g",zorder=20)
-plt.plot(range(-50,35),range(-50,35),color="r")
-
-#probplot(data, dist=norm(xbar,sd), plot=plt)
-plt.title("QQ Plot")
+plt.scatter(norm.ppf([(2*i+1)/80 for i in range(0,40)],xbar,sd),sorted(data),marker="o",color="g",zorder=20) # Data
+plt.plot(range(-50,35),range(-50,35),color="r") # Line
+plt.title("QQ Plot Normal(μ="+format(xbar, ".3f")+",σ="+format(sd, ".3f")+")")
 plt.xlabel("Expected Stock Price Returns")
 plt.ylabel("Sample Stock Price Returns")
 plt.savefig("qq.png",dpi=500)
@@ -62,6 +59,7 @@ with open("python.sty","w") as file:
         
     file.write("\ProvidesPackage{python}\n")
     writedef(file,"data","\\begin{tabularx}{0.8\\textwidth}{ "+">{\\raggedleft\\arraybackslash}X"*5+" }"+(", ").join("&"*(x%5!=0)+"\\\\\n"*(x%5==0 and x!=0)+(x==0)*"\n"+format(data[x], "6.3f") for x in range(len(data)))+"\\end{tabularx}")
+    writedef(file,"ID",str(ID))
     writedef(file,"xbar",format(xbar, ".3f"))
     writedef(file,"sd",format(sd, ".3f"))
     writedef(file,"se",format(se, ".3f"))
