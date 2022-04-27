@@ -4,9 +4,17 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{varwidth}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
 \usepackage{changepage}
 \usepackage{python}
 \usepackage{tabularx}
+
+
+\hypersetup{
+    colorlinks=true,    
+    urlcolor=blue,
+}
 
 \begin{document}
 
@@ -96,6 +104,11 @@ I would not reject the null hypothesis at $\alpha = 0.01$ as $p=\pvalue>0.01$. A
 I would reject the null hypothesis at $\alpha = 0.01$ as $p=\pvalue<0.01$. Also $0 \not\in \intervalB$.
 } \fi
 \end{minipage}%
+
+\begin{tcolorbox}
+{\large Source Code}\\
+\url{https://github.com/flippers2652/104Project}
+\end{tcolorbox}
 \end{document}
 
 """
