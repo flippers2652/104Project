@@ -1,0 +1,101 @@
+\documentclass[12pt,oneside]{book}
+
+\usepackage[a4paper, total={6.1in, 10in}]{geometry} % margin stuff
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{varwidth}
+\usepackage{changepage}
+\usepackage{python}
+\usepackage{tabularx}
+
+\begin{document}
+
+%%%Tital Page%%%
+\begin{center}
+	\vspace*{\baselineskip} % White space at the top of the page
+	
+	\rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2.5pt}
+	\rule{\textwidth}{0.4pt}
+	
+	\vspace{0.75\baselineskip}
+	
+	{\huge Mathematics 104}\\
+	Statistics\\ 
+	\vspace{0.25\baselineskip}
+	
+	\rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace{3.7pt} 
+	\rule{\textwidth}{1.6pt} 
+\end{center}
+\pagestyle{empty}
+
+
+
+%%%Data%%%
+\section*{Data}
+\data
+
+
+\section*{Project Questions}
+\hspace*{.02\textwidth}%
+\begin{minipage}{.96\textwidth}
+\subsection*{1. Calculate the sample mean.}
+The sample mean is $\xbar$.
+
+\subsection*{2. Calculate the sample standard deviation.}
+The sample standard deviation is $\sd$.
+
+\subsection*{3. Plot a histogram and Q-Q plot of your data against the normal distribution. Comment
+on whether the data appears to be normally distributed or not (2 sentences max).}
+\begin{center}
+\includegraphics[width=.4\textwidth]{hist.png}
+\includegraphics[width=.4\textwidth]{qq.png}
+\end{center}
+The data looks quite normally distributed however has an outlier at the positive side.
+\end{minipage}%
+\newpage
+\begin{minipage}{.96\textwidth}
+\subsection*{4. Discuss if assumptions required for the sample mean to be nearly normal are satisfied
+(3 sentences max).}
+The data set I've been give is ``randomly sampled" so the data will be independent.
+The sample size is 40 which is greater than 30 so therefore the sample is large.
+\ifdim \sk pt<0.5pt {
+	\ifdim \sk pt>-0.5pt {
+		From the charts above, the data does not seem to have a strong skew.
+	} \else {
+		From the charts above, the data seems to have a \ifdim \sk pt>-1.0pt {slight} \fi negative skew.
+		
+	} \fi
+} \else {
+From the charts above, the data seems to have a \ifdim \sk pt<1.0pt {slight} positive skew.
+} \fi
+\subsection*{5. Assuming the assumptions are satisfied, calculate the standard error of the mean.}
+The standard error of the mean is $\se$.
+\subsection*{6. Calculate a 95\% confidence interval for the average year-to-date stock return of S\&P
+500 companies.}
+The 95\% confidence interval is $\intervalA$.
+\subsection*{7. Calculate a 99\% confidence interval for the average year-to-date stock return of S\&P
+500 companies.}
+The 99\% confidence interval is $\intervalB$.
+
+\subsection*{8. Perform a hypothesis test which tests if the average year-to-date stock return of S\&P
+500 companies is equal to zero. Clearly setup your hypothesis test and report a p-value (to 3 significant figures).}
+$P=$``Stock Price Returns"\\
+$H_0:\mu_P=0$\\
+$H_A:\mu_P\neq0$\\
+The p-value for the mean of $\xbar$ is $\pvalue$.
+\subsection*{9. Would you reject the null hypothesis using a significance level of $\boldsymbol{\alpha}$ = 0.05?}
+\ifdim \pvalue pt>0.05pt {
+I would not reject the null hypothesis at $\alpha = 0.05$ as $p=\pvalue>0.05$. Also $0 \in \intervalA$.
+}\else {
+I would reject the null hypothesis at $\alpha = 0.05$ as $p=\pvalue<0.05$. Also $0 \not\in \intervalA$.
+} \fi
+\subsection*{10. Would you reject the null hypothesis using a significance level of $\boldsymbol{\alpha}$ = 0.01?}
+\ifdim \pvalue pt>0.01pt {
+I would not reject the null hypothesis at $\alpha = 0.01$ as $p=\pvalue>0.01$. Also $0 \in \intervalB$.
+} \else {
+I would reject the null hypothesis at $\alpha = 0.01$ as $p=\pvalue<0.01$. Also $0 \not\in \intervalB$.
+} \fi
+\end{minipage}%
+\end{document}
+
+"""
