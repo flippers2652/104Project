@@ -40,10 +40,8 @@ plt.xlabel("Expected Stock Price Returns")
 plt.ylabel("Sample Stock Price Returns")
 plt.savefig("qq.png",dpi=500)
 
-# Extra Data
-
+# Extra Data for 4
 z = zscore(data)
-
 pos_outliers=len(where(z > 3)[0])
 neg_outliers=len(where(z < -3)[0])
 
@@ -51,7 +49,7 @@ if neg_outliers==0:
     SDATA=sorted(data)[pos_outliers:]
 else:
     SDATA=sorted(data)[pos_outliers:-neg_outliers]
-    
+
 sk=skew(data)
 correlation_matrix = corrcoef(SDATA, norm.ppf([(2*i+1)/(40-pos_outliers-neg_outliers)/2 for i in range(0,40-pos_outliers-neg_outliers)],mean(SDATA),std(SDATA,ddof=1)))
 corr=correlation_matrix[0,1]
